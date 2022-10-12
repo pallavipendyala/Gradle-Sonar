@@ -34,13 +34,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: Listing Folder
-      run: |
-           ls -a
-           ls -a src/main/
-           ls -a bin/
-           ls -a src/main/java/
-           ls -a bin/main/output/
         
     # - name: SonarQube Scan
     #   uses: sonarsource/sonarcloud-github-action@master
@@ -70,6 +63,7 @@ jobs:
         args: >
           -Dsonar.organization=pallavipendyala
           -Dsonar.projectKey=pallavi_gradle
+          -Dsonar.java.binaries=bin/main
 
     # Check the Quality Gate status.
     - name: SonarQube Quality Gate check
