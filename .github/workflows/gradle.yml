@@ -24,13 +24,12 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.yml') }}
         restore-keys: ${{ runner.os }}-m2-
     - name: Download mongo image
-      run: docker pull mongo:4.4.3
+      run: |
+          docker pull mongo:4.4.3
+          chmod 777 gradlew
     - name: Build with Gradle and SonarCloud
       run: >
-        xvfb-run gradle sonarqube
-        -Dsonar.organization=pallavipendyala
-        -Dsonar.host.url=https://sonarcloud.io
-        -Dsonar.projectKey=pallavipendyala_gradlepro
+        ./gradlew build sonarqube --info
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
