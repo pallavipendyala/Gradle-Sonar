@@ -34,11 +34,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: listing folder
-      run: |
-            ls -a 
-            ls -a build/libs/
-    
+        
     # - name: SonarQube Scan
     #   uses: sonarsource/sonarcloud-github-action@master
     #   with:
@@ -49,16 +45,30 @@ jobs:
     #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
+    # - name: SonarQube Scan
+    #   uses: sonarsource/sonarqube-scan-action@master
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    #   with:
+    #     args: >
+    #       -Dsonar.organization=pallavipendyala
+    #       -Dsonar.projectKey=pallavi_gradle
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      with:
-        args: >
-          -Dsonar.organization=pallavipendyala
-          -Dsonar.projectKey=pallavi_gradle
-        
+
+    # Check the Quality Gate status.
+    - name: SonarQube Quality Gate check
+      id: sonarqube-quality-gate-check
+      uses: sonarsource/sonarqube-quality-gate-action@master
+      # Force to fail step after specific time.
+      timeout-minutes: 5
+      env:
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         
         
         
