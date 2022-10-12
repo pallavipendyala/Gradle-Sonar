@@ -173,6 +173,25 @@ sonarqube {
     property "sonar.projectKey", "pallavi_gradle"
     property "sonar.organization", "pallavipendyala"
     property "sonar.host.url", "https://sonarcloud.io"
+	property "sonar.projectName", "Example of SonarQube with Gradle"
+		
+	property "sonar.sourceEncoding", "UTF-8"
+	property "sonar.sources", "src/main/java"
+	
+	property "sonar.junit.reportPaths", "$project.projectDir/build/test-results"
+	property 'sonar.coverage.jacoco.xmlReportPaths', "$project.projectDir/build/reports/jacoco/test/jacocoTestReport.xml"
+	
+	// Ignore rules
+	property "sonar.issue.ignore.multicriteria", "e11, e12, e13"
+	
+	property "sonar.issue.ignore.multicriteria.e11.ruleKey", "java:S110"
+	property "sonar.issue.ignore.multicriteria.e11.resourceKey", "**/*.java"
+	
+	property "sonar.issue.ignore.multicriteria.e12.ruleKey", "java:S117"
+	property "sonar.issue.ignore.multicriteria.e12.resourceKey", "**/StudentSwingView.java"
+	
+	property "sonar.issue.ignore.multicriteria.e13.ruleKey", "java:S2699"
+	property "sonar.issue.ignore.multicriteria.e13.resourceKey", "**/StudentSwingViewTest.java"
   }
 }
 
