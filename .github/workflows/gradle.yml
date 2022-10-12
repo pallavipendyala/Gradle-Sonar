@@ -24,12 +24,10 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.yml') }}
         restore-keys: ${{ runner.os }}-m2-
     - name: Download mongo image
-      run: |
-          docker pull mongo:4.4.3
-          chmod 777 gradlew
+      run: docker pull mongo:4.4.3
     - name: Build with Gradle and SonarCloud
       run: >
-        xvfb-run gradle sonarqube
+        xvfb-run gradle build sonarqube
         -Dsonar.organization=pallavipendyala
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.projectKey=pallavi_gradle
@@ -40,6 +38,7 @@ jobs:
       run: |
             ls -a 
             ls -a build/libs/
+    
     - name: SonarQube Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
@@ -49,7 +48,16 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    
+
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      with:
+        args: >
+          -Dsonar.organization=pallavipendyala
+          -Dsonar.projectKey=pallavi_gradle
         
         
         
