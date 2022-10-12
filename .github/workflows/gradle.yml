@@ -23,6 +23,8 @@ jobs:
           ~/.sonar/cache
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.yml') }}
         restore-keys: ${{ runner.os }}-m2-
+    - name: Download mongo image
+      run: docker pull mongo:4.4.3
     - name: Build with Gradle and SonarCloud
       run: >
         xvfb-run gradle sonarqube
