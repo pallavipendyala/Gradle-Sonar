@@ -34,6 +34,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Listing Folder
+      run: |
+           ls -a
+           ls -a src/main/
+           ls -a src/main/output/
         
     # - name: SonarQube Scan
     #   uses: sonarsource/sonarcloud-github-action@master
