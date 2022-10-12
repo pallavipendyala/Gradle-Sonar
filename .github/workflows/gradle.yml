@@ -38,7 +38,9 @@ jobs:
       run: |
            ls -a
            ls -a src/main/
-           ls -a src/main/output/
+           ls -a src/bin/
+           ls -a src/main/java/
+           ls -a src/bin/output/
         
     # - name: SonarQube Scan
     #   uses: sonarsource/sonarcloud-github-action@master
