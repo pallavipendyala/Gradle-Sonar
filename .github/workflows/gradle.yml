@@ -39,15 +39,15 @@ jobs:
             ls -a 
             ls -a build/libs/
     
-    - name: SonarQube Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      with:
-        args: >
-          -Dsonar.organization=pallavipendyala
-          -Dsonar.projectKey=pallavi_gradle
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    # - name: SonarQube Scan
+    #   uses: sonarsource/sonarcloud-github-action@master
+    #   with:
+    #     args: >
+    #       -Dsonar.organization=pallavipendyala
+    #       -Dsonar.projectKey=pallavi_gradle
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
