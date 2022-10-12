@@ -25,7 +25,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2-
     - name: Build with Gradle and SonarCloud
       run: >
-        ./gradlew sonarqube
+        xvfb-run gradle sonarqube
         -Dsonar.organization=pallavipendyala
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.projectKey=pallavipendyala_gradlepro
