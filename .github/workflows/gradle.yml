@@ -34,26 +34,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        
-    # - name: SonarQube Scan
-    #   uses: sonarsource/sonarcloud-github-action@master
-    #   with:
-    #     args: >
-    #       -Dsonar.organization=pallavipendyala
-    #       -Dsonar.projectKey=pallavi_gradle
-    #   env:
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
-    # - name: SonarQube Scan
-    #   uses: sonarsource/sonarqube-scan-action@master
-    #   env:
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    #   with:
-    #     args: >
-    #       -Dsonar.organization=pallavipendyala
-    #       -Dsonar.projectKey=pallavi_gradle
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
@@ -74,6 +54,16 @@ jobs:
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+    - uses: jfrog/setup-jfrog-cli@v2
+      env:
+        # JFrog platform url (for example: https://acme.jfrog.io) 
+        JF_URL: ${{ secrets.JF_URL }}
+        JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+      
+    - run: |
+          jf rt ping 
+          jf rt u "build/libs/*" Gradlepro/
         
         
         
